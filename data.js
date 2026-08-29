@@ -101,7 +101,7 @@ const jokes = [
     },
         {
         id: "three-star",
-        name: "Another three start photo",
+        name: "Another three star photo",
         category: "Quote/Moment",
         era: "2023-2024",
         status: "Inanimate",

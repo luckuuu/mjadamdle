@@ -237,14 +237,14 @@ function updateModeUI() {
   const newGameBtn = document.getElementById('newGameBtn');
   const toggleBtn = document.getElementById('modeToggleBtn');
   if (game.mode === 'infinite') {
-    banner.textContent = '♾️ Infinite Mode — unlimited practice games, these do not count toward your streak.';
+    banner.textContent = 'Infinite Mode does NOT count toward your streak.';
     banner.style.display = 'block';
     newGameBtn.style.display = game.solved ? 'inline-block' : 'none';
-    toggleBtn.textContent = '📅 Back to Daily';
+    toggleBtn.textContent = 'Back to Daily';
   } else {
     banner.style.display = 'none';
     newGameBtn.style.display = 'none';
-    toggleBtn.textContent = '♾️ Infinite Mode';
+    toggleBtn.textContent = 'Infinite Mode';
   }
 }
 
