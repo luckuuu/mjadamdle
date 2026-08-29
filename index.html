@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>mjadamdle</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Chewy&family=DynaPuff:wght@400..700&family=Manrope:wght@800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="fx-wave" role="img" aria-label="WAVE">
+        <b aria-hidden="true" style="--i:0">m</b>
+        <b aria-hidden="true" style="--i:1">j</b>
+        <b aria-hidden="true" style="--i:2">a</b>
+        <b aria-hidden="true" style="--i:3">d</b>
+        <b aria-hidden="true" style="--i:4">a</b>
+        <b aria-hidden="true" style="--i:5">m</b>
+        <b aria-hidden="true" style="--i:6">d</b>
+        <b aria-hidden="true" style="--i:7">l</b>
+        <b aria-hidden="true" style="--i:8">e</b>
+        <b aria-hidden="true" style="--i:8"></b>
+        <b aria-hidden="true" style="--i:9">!</b>
+    </div>
+    <div id="space2"></div>
+    <div id="info">
+        <p>The MJ and Adam guessing game. New content added every day.</p>
+    </div>
+    <div id="space"></div>
+    <div id="modeBanner"></div>
+    <div id="search">
+        <input id="inputBar" type="text" placeholder="Enter here..." autocomplete="off">
+    </div>
+    <div id="space"></div>
+    <table id="board">
+        <thead>
+            <tr>
+                <th>Guess</th>
+                <th>Category</th>
+                <th>Era</th>
+                <th>Status</th>
+                <th>Color</th>
+                <th>Rating</th>
+            </tr>
+        </thead>
+        <tbody id="boardBody"></tbody>
+    </table>
+    <div id="space"></div>
+    <div id="status"></div>
+    <div id="guessCount"></div>
+    <div id="space"></div>
+
+    <div id="buttons">
+        <button id="statsBtn" class="btn">Stats</button>
+        <button id="newGameBtn" class="btn" style="display:none;">New Game</button>
+        <button id="modeToggleBtn" class="btn">Infinite Mode</button>
+        <button id="infoBtn" class="btn">Info</button>
+    </div>
+
+    <div class="overlay" id="statsOverlay">
+    <div class="modal">
+        <button class="closeBtn" id="closeStats">✕</button>
+        <h2>Your Stats</h2>
+        <div id="statsBody"><div class="statsLoading">Loading stats…</div></div>
+    </div>
+    </div>
+
+    <div class="overlay" id="infoOverlay">
+    <div class="modal">
+        <button class="closeBtn" id="closeInfo">✕</button>
+        <h2>Info</h2>
+        <div id="infoBody">
+            <div class="infoLoading">Okay so I understand that these hints are really bad and the rules for them kinda change from guess to guess but I’ll try my best to explain each and MOST of the time they stay true to that.</div>
+            <div id="space2"></div>
+            <div>Category: Quote/Moment if it’s a quote or moment. Person if it is a person, dead, alive, real, or not real. Game Related if it is a THING from a video game. If it is a person from a video game it does under the Person category. Thing/Idea if it is an object or intangible item. Song if it is a song.</div>
+            <div id="space2"></div>
+            <div>Era: There are three eras. 2020-2022, 2023-2024, and 2025-present. If something spans over multiple eras, it will be placed in the most relevant category.</div>
+            <div id="space2"></div>
+            <div>Status: If the category is Person, are they alive or dead? This includes spiritually as well.</div>
+            <div id="space2"></div>
+            <div>Color: Probably the most useless hint, what color does this thing FIRST remind me of? There are two groups of colors: Red, Orange, Yellow, Green, Blue, Purple, and Pink and the other group is every other color. If the color is in the same group it will be yellow.</div>
+            <div id="space2"></div>
+            <div>Rating: What would I rate this thing 0 to 5?</div>
+        </div>
+    </div>
+    </div>
+
+    <div class="overlay" id="lightboxOverlay">
+    <div class="modal" style="max-width:min(90vw, 500px); padding:16px; text-align:center;">
+        <button class="closeBtn" id="closeLightbox">✕</button>
+        <img id="lightboxImg" src="" alt="" style="max-width:100%; max-height:75vh; border-radius:10px; display:block; margin:8px auto 0;">
+    </div>
+    </div>
+
+    <div id="suggestions"></div>
+
+    <script src="data.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>
