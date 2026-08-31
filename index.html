@@ -10,6 +10,14 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <div class="page">
+
+    <aside id="dbPanel" class="sidePanel">
+        <h2 class="sidePanelTitle">Database</h2>
+        <div id="dbList" class="dbList"></div>
+    </aside>
+
+    <div id="mainCol">
     <div class="fx-wave" role="img" aria-label="WAVE">
         <b aria-hidden="true" style="--i:0">m</b>
         <b aria-hidden="true" style="--i:1">j</b>
@@ -94,8 +102,30 @@
     </div>
 
     <div id="suggestions"></div>
+    </div>
+
+    <aside id="playlistPanel" class="sidePanel">
+        <h2 class="sidePanelTitle">Playlist</h2>
+        <div id="nowPlaying" class="nowPlaying">
+            <img id="npCover" class="npCover" src="" alt="" style="display:none;">
+            <div class="npInfo">
+                <div id="npTitle" class="npTitle">No song loaded</div>
+                <div id="npArtist" class="npArtist"></div>
+            </div>
+        </div>
+        <div id="playerControls" class="playerControls">
+            <button id="prevBtn" class="playerBtn" title="Previous" aria-label="Previous song">⏮</button>
+            <button id="playPauseBtn" class="playerBtn playerBtnMain" title="Play/Pause" aria-label="Play or pause">▶</button>
+            <button id="nextBtn" class="playerBtn" title="Next" aria-label="Next song">⏭</button>
+        </div>
+        <div id="playlistList" class="playlistList"></div>
+        <audio id="audioPlayer" preload="none"></audio>
+    </aside>
+
+  </div>
 
     <script src="data.js"></script>
+    <script src="songs.js"></script>
     <script src="main.js"></script>
 </body>
 </html>

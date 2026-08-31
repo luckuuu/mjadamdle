@@ -425,5 +425,109 @@ infoBtn.addEventListener('click', async () => {
   infoOverlay.classList.add('open');
 });
 
+/* ============================================================
+   8) DATABASE SIDEBAR — scrollable list of every entry (name +
+   image only, no other hints). Reuses the lightbox from the
+   guess board.
+   ============================================================ */
+function renderDatabase() {
+  const dbList = document.getElementById('dbList');
+  if (!dbList) return;
+  dbList.innerHTML = jokes.map(j => {
+    const thumb = j.image ? `<img src="${j.image}" alt="${j.name}" onerror="this.remove()">` : '';
+    return `<div class="dbEntry" data-id="${j.id}">${thumb}<span>${j.name}</span></div>`;
+  }).join('');
+}
+
+document.getElementById('dbList')?.addEventListener('click', (e) => {
+  const img = e.target.closest('img');
+  if (img) openLightbox(img.src, img.alt);
+});
+
+renderDatabase();
+
+/* ============================================================
+   9) PLAYLIST SIDEBAR — plays songs from the "music" folder
+   using song info from songs.js. Supports play/pause/skip/back.
+   ============================================================ */
+let currentTrackIndex = 0;
+let isPlaying = false;
+
+const audioPlayer = document.getElementById('audioPlayer');
+const playPauseBtn = document.getElementById('playPauseBtn');
+const prevTrackBtn = document.getElementById('prevBtn');
+const nextTrackBtn = document.getElementById('nextBtn');
+const npCover = document.getElementById('npCover');
+const npTitle = document.getElementById('npTitle');
+const npArtist = document.getElementById('npArtist');
+const playlistListEl = document.getElementById('playlistList');
+
+function renderPlaylist() {
+  if (!playlistListEl) return;
+  playlistListEl.innerHTML = songs.map((s, i) => {
+    const cover = s.cover ? `<img src="${s.cover}" alt="${s.title}" onerror="this.remove()">` : '';
+    return `
+      <div class="playlistItem${i === currentTrackIndex ? ' playing' : ''}" data-index="${i}">
+        ${cover}
+        <div class="plMeta">
+          <div class="plTitle">${s.title}</div>
+          <div class="plArtist">${s.artist}</div>
+        </div>
+      </div>`;
+  }).join('');
+}
+
+function updatePlayPauseIcon() {
+  if (playPauseBtn) playPauseBtn.textContent = isPlaying ? '⏸' : '▶';
+}
+
+function loadTrack(index, autoplay = false) {
+  if (!songs.length || !audioPlayer) return;
+  currentTrackIndex = ((index % songs.length) + songs.length) % songs.length;
+  const track = songs[currentTrackIndex];
+
+  audioPlayer.src = track.file;
+  if (npTitle) npTitle.textContent = track.title;
+  if (npArtist) npArtist.textContent = track.artist || '';
+  if (npCover) {
+    if (track.cover) { npCover.src = track.cover; npCover.style.display = 'block'; }
+    else { npCover.removeAttribute('src'); npCover.style.display = 'none'; }
+  }
+  renderPlaylist();
+
+  if (autoplay) {
+    audioPlayer.play().then(() => { isPlaying = true; updatePlayPauseIcon(); }).catch(() => {});
+  } else {
+    updatePlayPauseIcon();
+  }
+}
+
+function togglePlayPause() {
+  if (!songs.length || !audioPlayer) return;
+  if (!audioPlayer.src) { loadTrack(currentTrackIndex, true); return; }
+  if (isPlaying) audioPlayer.pause();
+  else audioPlayer.play().catch(() => {});
+}
+
+function playNext() { loadTrack(currentTrackIndex + 1, true); }
+function playPrev() { loadTrack(currentTrackIndex - 1, true); }
+
+playPauseBtn?.addEventListener('click', togglePlayPause);
+nextTrackBtn?.addEventListener('click', playNext);
+prevTrackBtn?.addEventListener('click', playPrev);
+
+audioPlayer?.addEventListener('ended', playNext);
+audioPlayer?.addEventListener('play', () => { isPlaying = true; updatePlayPauseIcon(); });
+audioPlayer?.addEventListener('pause', () => { isPlaying = false; updatePlayPauseIcon(); });
+
+playlistListEl?.addEventListener('click', (e) => {
+  const item = e.target.closest('.playlistItem');
+  if (!item) return;
+  loadTrack(Number(item.dataset.index), true);
+});
+
+renderPlaylist();
+if (songs.length) loadTrack(0, false);
+
 // boot
 loadTodayProgress();

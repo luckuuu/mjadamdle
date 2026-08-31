@@ -417,6 +417,7 @@ const jokes = [
         status: "Inanimate",
         color: "Red",
         rating: "-1000000",
+        image: "pics/tsundere.png",
     },
     {
         id: "mookie",
@@ -446,6 +447,7 @@ const jokes = [
         status: "Alive",
         color: "White",
         rating: "5",
+        image: "pics/joe.jpg",
     },
     {
         id: "mark",
@@ -455,6 +457,7 @@ const jokes = [
         status: "Inanimate",
         color: "Gray",
         rating: "4",
+        image: "pics/mark.jpg",
     },
     {
         id: "yankees-parking",
@@ -464,6 +467,7 @@ const jokes = [
         status: "Inanimate",
         color: "Blue",
         rating: "0",
+        image: "pics/yankees.jpg",
     },
     {
         id: "bb",
@@ -473,6 +477,7 @@ const jokes = [
         status: "Inanimate",
         color: "Red",
         rating: "3",
+        image: "pics/Bloodbath.png",
     },
     {
         id: "mrcala",
@@ -482,6 +487,7 @@ const jokes = [
         status: "Dead",
         color: "Blue",
         rating: "3",
+        image: "pics/cala.jpg",
     },
     {
         id: "cata",
@@ -491,6 +497,7 @@ const jokes = [
         status: "Inanimate",
         color: "Orange",
         rating: "2",
+        image: "pics/cataclysm.jpg",
     },
     {
         id: "than",
@@ -500,6 +507,7 @@ const jokes = [
         status: "Inanimate",
         color: "Black",
         rating: "1",
+        image: "pics/than.png",
     },
     {
         id: "blackblizzard",
@@ -509,6 +517,7 @@ const jokes = [
         status: "Inanimate",
         color: "Black",
         rating: "4",
+        image: "pics/bb.jpg",
     },
     {
         id: "ssoh",
@@ -518,6 +527,7 @@ const jokes = [
         status: "Inanimate",
         color: "Red",
         rating: "4",
+        image: "pics/ssoh.png",
     },
     {
         id: "icedcave",
@@ -527,6 +537,7 @@ const jokes = [
         status: "Alive",
         color: "White",
         rating: "4",
+        image: "pics/icedcave.png",
     },
     {
         id: "yourmom",
@@ -536,6 +547,7 @@ const jokes = [
         status: "Inanimate",
         color: "Orange",
         rating: "0",
+        image: "pics/yourmom.jpg",
     },
     {
         id: "shallot",
@@ -545,6 +557,7 @@ const jokes = [
         status: "Alive",
         color: "White",
         rating: "1",
+        image: "pics/shallot.png",
     },
     {
         id: "dan",
@@ -554,6 +567,7 @@ const jokes = [
         status: "Alive",
         color: "Gray",
         rating: "4",
+        image: "pics/dan.png",
     },
     {
         id: "goryo",
@@ -563,6 +577,7 @@ const jokes = [
         status: "Dead (fictitious)",
         color: "Gray",
         rating: "1",
+        image: "pics/goryo.jpg",
     },
     {
         id: "ohnepixel",
@@ -572,6 +587,7 @@ const jokes = [
         status: "Alive",
         color: "Gold",
         rating: "4",
+        image: "pics/ohne.jpg",
     },
     {
         id: "sableye",
@@ -581,6 +597,7 @@ const jokes = [
         status: "Inanimate",
         color: "Purple",
         rating: "5",
+        image: "pics/sableye.jpg",
     },
     {
         id: "wydd",
@@ -590,6 +607,7 @@ const jokes = [
         status: "Inanimate",
         color: "Blue",
         rating: "3",
+        image: "pics/wyd.jpg",
     },
     {
         id: "codiw",
@@ -599,6 +617,7 @@ const jokes = [
         status: "Inanimate",
         color: "Yellow",
         rating: "4",
+        image: "pics/iw.jpg",
     },
     {
         id: "codbo2",
@@ -608,69 +627,7 @@ const jokes = [
         status: "Inanimate",
         color: "Orange",
         rating: "5",
-    },
-    {
-        id: "kino",
-        name: "Kino Der Toten Black Ops 1",
-        category: "Game Related",
-        era: "2025-present",
-        status: "Inanimate",
-        color: "Gray",
-        rating: "2",
-    },
-    {
-        id: "kino",
-        name: "Kino Der Toten Black Ops 1",
-        category: "Game Related",
-        era: "2025-present",
-        status: "Inanimate",
-        color: "Gray",
-        rating: "2",
-    },
-    {
-        id: "kino",
-        name: "Kino Der Toten Black Ops 1",
-        category: "Game Related",
-        era: "2025-present",
-        status: "Inanimate",
-        color: "Gray",
-        rating: "2",
-    },
-    {
-        id: "kino",
-        name: "Kino Der Toten Black Ops 1",
-        category: "Game Related",
-        era: "2025-present",
-        status: "Inanimate",
-        color: "Gray",
-        rating: "2",
-    },
-    {
-        id: "kino",
-        name: "Kino Der Toten Black Ops 1",
-        category: "Game Related",
-        era: "2025-present",
-        status: "Inanimate",
-        color: "Gray",
-        rating: "2",
-    },
-    {
-        id: "kino",
-        name: "Kino Der Toten Black Ops 1",
-        category: "Game Related",
-        era: "2025-present",
-        status: "Inanimate",
-        color: "Gray",
-        rating: "2",
-    },
-    {
-        id: "kino",
-        name: "Kino Der Toten Black Ops 1",
-        category: "Game Related",
-        era: "2025-present",
-        status: "Inanimate",
-        color: "Gray",
-        rating: "2",
+        image: "pics/bo2.jpg",
     }
 ];
 
