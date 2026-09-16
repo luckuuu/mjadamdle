@@ -14,6 +14,7 @@
 
     <aside id="dbPanel" class="sidePanel">
         <h2 class="sidePanelTitle">Database</h2>
+        <input id="dbSearch" type="text" class="dbSearchInput" placeholder="Search entries..." autocomplete="off">
         <div id="dbList" class="dbList"></div>
     </aside>
 
@@ -64,6 +65,7 @@
         <button id="newGameBtn" class="btn" style="display:none;">New Game</button>
         <button id="modeToggleBtn" class="btn">Infinite Mode</button>
         <button id="infoBtn" class="btn">Info</button>
+        <button id="shareBtn" class="btn" style="display:none;">Share Results</button>
     </div>
 
     <div class="overlay" id="statsOverlay">
@@ -117,6 +119,10 @@
             <button id="prevBtn" class="playerBtn" title="Previous" aria-label="Previous song">⏮</button>
             <button id="playPauseBtn" class="playerBtn playerBtnMain" title="Play/Pause" aria-label="Play or pause">▶</button>
             <button id="nextBtn" class="playerBtn" title="Next" aria-label="Next song">⏭</button>
+        </div>
+        <div id="volumeControl" class="volumeControl">
+            <span class="volumeIcon" aria-hidden="true"></span>
+            <input id="volumeSlider" class="volumeSlider" type="range" min="0" max="100" value="80" aria-label="Volume">
         </div>
         <div id="playlistList" class="playlistList"></div>
         <audio id="audioPlayer" preload="none"></audio>

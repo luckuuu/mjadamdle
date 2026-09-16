@@ -189,6 +189,8 @@ function clearBoard() {
   status.textContent = '';
   status.classList.remove('win');
   input.disabled = false;
+  const shareBtnEl = document.getElementById('shareBtn');
+  if (shareBtnEl) shareBtnEl.style.display = 'none';
   updateCount();
 }
 
@@ -202,6 +204,8 @@ function endGame() {
   input.disabled = true;
   status.textContent = `🎉 Got it — "${game.answer.name}" — in ${game.guessedIds.size} guess${game.guessedIds.size === 1 ? '' : 'es'}!`;
   status.classList.add('win');
+  const shareBtnEl = document.getElementById('shareBtn');
+  if (shareBtnEl) shareBtnEl.style.display = 'inline-block';
   if (game.mode === 'daily') {
     recordWin(game.guessedIds.size);
   } else {
@@ -320,8 +324,10 @@ async function loadTodayProgress() {
       game.solved = true;
       const status = document.getElementById('status');
       input.disabled = true;
-      status.textContent = `🎉 Got it — "${game.answer.name}" — in ${game.guessedIds.size} guess${game.guessedIds.size === 1 ? '' : 'es'}!`;
+      status.textContent = `Got it — "${game.answer.name}" — in ${game.guessedIds.size} guess${game.guessedIds.size === 1 ? '' : 'es'}!`;
       status.classList.add('win');
+      const shareBtnEl = document.getElementById('shareBtn');
+      if (shareBtnEl) shareBtnEl.style.display = 'inline-block';
     }
   } catch (e) { /* no saved progress yet for today - that's fine */ }
 }
@@ -430,18 +436,24 @@ infoBtn.addEventListener('click', async () => {
    image only, no other hints). Reuses the lightbox from the
    guess board.
    ============================================================ */
-function renderDatabase() {
+function renderDatabase(query = '') {
   const dbList = document.getElementById('dbList');
   if (!dbList) return;
-  dbList.innerHTML = jokes.map(j => {
+  const q = query.trim().toLowerCase();
+  const filtered = q ? jokes.filter(j => j.name.toLowerCase().includes(q)) : jokes;
+  dbList.innerHTML = filtered.map(j => {
     const thumb = j.image ? `<img src="${j.image}" alt="${j.name}" onerror="this.remove()">` : '';
     return `<div class="dbEntry" data-id="${j.id}">${thumb}<span>${j.name}</span></div>`;
-  }).join('');
+  }).join('') || '<div class="dbEmpty">No matches</div>';
 }
 
 document.getElementById('dbList')?.addEventListener('click', (e) => {
   const img = e.target.closest('img');
   if (img) openLightbox(img.src, img.alt);
+});
+
+document.getElementById('dbSearch')?.addEventListener('input', (e) => {
+  renderDatabase(e.target.value);
 });
 
 renderDatabase();
@@ -528,6 +540,75 @@ playlistListEl?.addEventListener('click', (e) => {
 
 renderPlaylist();
 if (songs.length) loadTrack(0, false);
+
+/* ============================================================
+   10) VOLUME METER — controls audioPlayer.volume; the slider's
+   own fill is redrawn as a gradient so it doubles as a level meter.
+   ============================================================ */
+const volumeSlider = document.getElementById('volumeSlider');
+
+function updateVolumeMeterFill() {
+  if (!volumeSlider) return;
+  const pct = volumeSlider.value;
+  volumeSlider.style.background = `linear-gradient(to right, var(--accent) ${pct}%, var(--line) ${pct}%)`;
+}
+
+if (volumeSlider && audioPlayer) {
+  audioPlayer.volume = Number(volumeSlider.value) / 100;
+  updateVolumeMeterFill();
+  volumeSlider.addEventListener('input', () => {
+    audioPlayer.volume = Number(volumeSlider.value) / 100;
+    updateVolumeMeterFill();
+  });
+}
+
+/* ============================================================
+   11) SHARE RESULTS — Wordle-style emoji grid of this game's
+   guesses, copied to the clipboard.
+   ============================================================ */
+const shareBtn = document.getElementById('shareBtn');
+
+function resultToEmoji(cls) {
+  if (cls === 'correct') return '🟩';
+  if (cls === 'close') return '🟨';
+  return '⬛';
+}
+
+function buildShareText() {
+  const orderedGuesses = [...game.guessedIds]
+    .map(id => jokes.find(j => j.id === id))
+    .filter(Boolean);
+
+  const rows = orderedGuesses.map(g => {
+    const r = evaluateGuess(g);
+    return [
+      resultToEmoji(r.category),
+      resultToEmoji(r.era.cls),
+      resultToEmoji(r.status),
+      resultToEmoji(r.color),
+      resultToEmoji(r.rating.cls)
+    ].join('');
+  });
+
+  const modeLabel = game.mode === 'daily' ? `Daily ${TODAY}` : 'Infinite';
+  const header = `mjadamdle — ${modeLabel} — ${game.guessedIds.size} guess${game.guessedIds.size === 1 ? '' : 'es'}`;
+  return [header, ...rows].join('\n');
+}
+
+async function shareResults() {
+  const text = buildShareText();
+  try {
+    await navigator.clipboard.writeText(text);
+    const original = shareBtn.textContent;
+    shareBtn.textContent = 'Copied!';
+    setTimeout(() => { shareBtn.textContent = original; }, 1500);
+  } catch (e) {
+    console.error('Could not copy results', e);
+    window.prompt('Copy your results:', text);
+  }
+}
+
+shareBtn?.addEventListener('click', shareResults);
 
 // boot
 loadTodayProgress();

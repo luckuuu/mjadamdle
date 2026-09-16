@@ -58,9 +58,16 @@ body{
 }
 
 /* --- Database panel --- */
+.dbSearchInput{
+    width:100%; padding:8px 10px; margin-bottom:10px; box-sizing:border-box;
+    font-size:0.82rem; border-radius:8px; font-family:inherit;
+    border:1px solid var(--line); background:#1b1a20; color:var(--text); outline:none;
+}
+.dbSearchInput:focus{ border-color:var(--accent); }
 .dbList{
     overflow-y:auto; display:flex; flex-direction:column; gap:8px; padding-right:2px;
 }
+.dbEmpty{ text-align:center; color:var(--muted); font-size:0.8rem; padding:12px 0; }
 
 .dbList::-webkit-scrollbar, .dblist::-webkit-scrollbar-button { display: none; }
 .dbEntry{
@@ -85,6 +92,22 @@ body{
 .playerBtn{ background:none; border:none; color:var(--text); font-size:1.25rem; cursor:pointer; padding:4px; line-height:1; }
 .playerBtn:hover{ color:var(--accent); }
 .playerBtnMain{ font-size:1.6rem; }
+
+.volumeControl{ display:flex; align-items:center; gap:8px; margin-bottom:14px; padding:0 2px; }
+.volumeIcon{ font-size:0.9rem; flex-shrink:0; }
+.volumeSlider{
+    flex:1; -webkit-appearance:none; appearance:none;
+    height:5px; border-radius:4px; outline:none; cursor:pointer;
+    background:linear-gradient(to right, var(--accent) 80%, var(--line) 80%);
+}
+.volumeSlider::-webkit-slider-thumb{
+    -webkit-appearance:none; appearance:none;
+    width:13px; height:13px; border-radius:50%; background:var(--accent); cursor:pointer;
+}
+.volumeSlider::-moz-range-thumb{
+    width:13px; height:13px; border-radius:50%; background:var(--accent); border:none; cursor:pointer;
+}
+.volumeSlider::-moz-range-track{ height:5px; border-radius:4px; background:var(--line); }
 
 .playlistList{ overflow-y:auto; display:flex; flex-direction:column; gap:6px; flex:1; }
 .playlistItem{
