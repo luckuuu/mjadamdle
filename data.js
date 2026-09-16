@@ -663,7 +663,7 @@ const jokes = [
         id: "joeim",
         name: "Joe I'm Gay Can You Come Help Me Out?",
         category: "Quote/Moment",
-        era: "2025-Present",
+        era: "2025-present",
         status: "Inanimate",
         color: "Black",
         rating: "3",
